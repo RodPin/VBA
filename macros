@@ -1,0 +1,166 @@
+Sub PrimeiraMacro()
+'
+' PrimeiraMacro Macro
+' Primeira macro criada na aula de excel
+'
+' Keyboard Shortcut: Ctrl+Shift+F
+'
+    Range("C10").Value = "Rodrigo"
+    Range("C11").Value = "22"
+    Range("C12").Value = "10/29/1996"
+  
+End Sub
+
+
+Sub escrever()
+' Keyboard Shortcut: Ctrl+Shift+x
+
+    Range("D6:F9").Value = "Rod"
+    
+    Cells(5, 5).Value = "Rooood"
+End Sub
+
+Sub BestProf()
+    Range("C9").Value = "Alon"
+End Sub
+
+
+Sub facul()
+    Sheets("Modificar Células").Activate
+    Range("B14:H16").Value = "UFRJ"
+End Sub
+
+Sub produtos()
+     Dim Linha As Integer
+     Linha = 23
+     
+     Sheets("Variáveis").Activate
+     Cells(Linha, 3).NumberFormat = "$ #,##0.00"
+     Cells(Linha, 2).Value = "Guaraná Natural"
+     Cells(Linha, 3).Value = 1.5
+     Cells(Linha, 4).Value = 1000
+End Sub
+
+Sub soma()
+    Sheets("Mais Operações").Activate
+    Dim n1, n2, n3 As Integer
+    n1 = Cells(3, 3)
+    n2 = Cells(4, 3)
+    n3 = Cells(5, 3)
+    
+    Cells(6, 3) = n1 + n2 + n3
+    
+    Cells(7, 3) = n1 ^ 2 + n2 ^ 2 + n3 ^ 2
+    
+    Cells(8, 3) = (n1 + n2 + n3) ^ 2
+    
+End Sub
+
+Sub somaIntervalo()
+    Range("C11").NumberFormat = "$ #,##0.00"
+    Range("C11") = WorksheetFunction.Sum(Range("C13:C47"))
+End Sub
+
+Sub Calculos()
+    Sheets("Resultado Operacional").Activate
+    Dim fat As Integer, custos  As Integer, lucro As Integer, margem As Double
+    fat = Cells(3, 3)
+    custos = WorksheetFunction.Sum(Range("C4:C8"))
+    lucro = fat - custos
+    margem = lucro / custos
+    
+    Cells(10, 3) = lucro
+    Cells(11, 3) = margem
+End Sub
+
+Sub nomes()
+ Sheets("nome").Activate
+' Pegar um some de uma string (Leticia chagas pires)
+'leticia
+    Cells(1, 1).Value = Left(Cells(3, 3).Value, 7)
+'chagas
+    Cells(2, 1).Value = Mid(Cells(3, 3).Value, 9, 6)
+'pires
+    Cells(3, 1).Value = Right(Cells(3, 3).Value, 5)
+    
+    Cells(4, 1).Value = Cells(2, 1).Value + " " + Cells(3, 1).Value
+    Cells(5, 1).Value = Cells(2, 1).Value & " " & Cells(3, 1).Value
+End Sub
+
+Sub redBull()
+Sheets("Controle de Modificações").Activate
+    Cells(31, 3).Value = UCase(Mid(Cells(31, 2).Value, 8))
+    Cells(32, 3).Value = UCase(Mid(Cells(32, 2).Value, 8))
+    Range("E31").Value = Now()
+End Sub
+
+
+Sub messageBox()
+    resp = MsgBox("Meu pastel é mais barato", vbYesNo)
+        If resp = 6 Then
+    MsgBox ("Executada")
+    Else
+    MsgBox ("Cancelado")
+    End If
+End Sub
+
+Sub status()
+    Sheets("Exercício Confirmação").Activate
+    If Range("C7") >= Range("D7") Then
+        Range("e7") = "Produto OK"
+    Else
+        Range("e7") = "Produto em Falta"
+    End If
+End Sub
+
+Sub status2()
+    Sheets("Exercício Confirmação").Activate
+    Dim i As Integer
+
+    For i = 7 To 10
+      
+    If Cells(i, 3).Value >= Cells(i, 4).Value Then
+       Cells(i, 5).Value = "Produto OK"
+    Else
+        Cells(i, 5).Value = "Produto em Falta"
+    End If
+    Next i
+  
+End Sub
+
+Sub mensagem2()
+    resp = InputBox("Digite o CPF")
+    Range("c15").Value = resp
+End Sub
+
+Sub produto()
+    
+    yn = MsgBox("Quer executar a macro?", vbYesNo)
+    
+    If yn = 6 Then
+        nome = InputBox("digite o nome")
+        preco = InputBox("digite o preco")
+        qtd = InputBox("digite o quantidade")
+        Range("b13").Value = nome
+        Range("c13").Value = preco
+        Range("d13").Value = qtd
+        Range("c13").NumberFormat = "$ #,##0.00"
+    End If
+      
+End Sub
+
+Sub carro()
+ 
+    yn = MsgBox("Quer Cadastrar o carro?", vbYesNo)
+    
+    If yn = 6 Then
+        car = InputBox("digite o Carro")
+        preco = InputBox("digite o preco")
+        opcionais = InputBox("digite o opcionais")
+        Range("b4").Value = Now()
+        Range("c4").Value = car
+        Range("d4").Value = preco
+        Range("e4").Value = opcionais
+        Range("d4").NumberFormat = "$ #,##0.00"
+    End If
+End Sub
