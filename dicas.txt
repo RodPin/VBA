@@ -1,0 +1,18 @@
+Range("C2").Copy		Abrir VBA:alt+F11			Rodar Pela macro:F5
+Range("C2").Color						Rodar Linha por linha:F8
+Range("C2").Value
+
+Range("C2:D9").Value="Ronaldo"
+
+Cells("9,2").Value="MESSI"
+
+escolher a sheet:
+Sheets("Modificar Célulars").Activate
+
+Mudar formatacao da celular: record macro e usar o codigo dela
+
+Variaveis:
+	Dim Linha as Integer	
+	Linha=23
+
+worksheetfunction.    => Permite que chame funcoes do worksheet
