@@ -1,0 +1,124 @@
+Sub repeticao()
+    Dim i As Integer
+    '5hy8c5'
+    i = 1
+    
+    Do Until i = 11
+        Cells(i, 7).Value = "VBA"
+        i = i + 1
+    Loop
+    
+End Sub
+
+
+Sub bonus()
+    Dim i As Integer
+    
+    i = 13
+    
+    Do Until Cells(i, 3) = ""
+        Cells(i, 4).Value = Cells(i, 3) * 0.13
+        i = i + 1
+    Loop
+    
+End Sub
+
+Sub doWhile()
+    Dim i As Integer
+    
+    i = 26
+    Do While Cells(i, 3) <> ""
+        Cells(i, 4).Value = Left(Cells(i, 2), 8)
+        i = i + 1
+    Loop
+    
+End Sub
+
+Sub situacao()
+    ultimaL = Range("B1").End(xlDown).Row
+    For i = 2 To ultimaL
+        If Cells(i, 3).Value >= 6 Then
+            Cells(i, 4).Value = "Aprovado"
+            Cells(i, 4).Interior.color = 5287936
+        ElseIf Cells(i, 3).Value >= 4 Then
+             Cells(i, 4).Value = "Prova Final"
+            Cells(i, 4).Interior.ColorIndex = 44
+        Else
+            Cells(i, 4).Value = "Reprovado"
+             Cells(i, 4).Interior.ColorIndex = 3
+            
+        End If
+    Next
+End Sub
+
+Sub carroVendido()
+    
+    carro = InputBox("Qual o carro")
+    preco = InputBox("Preço")
+    opcionais = InputBox("Qual o opcionais")
+    lineToWrite = Range("B25").End(xlDown).Row + 1
+    
+    
+    Cells(lineToWrite, 2) = Date
+    Cells(lineToWrite, 3) = carro
+    Cells(lineToWrite, 4) = preco
+    Cells(lineToWrite, 4).NumberFormat = "$ #,##0.00"
+    Cells(lineToWrite, 5) = opcionais
+      
+    
+End Sub
+
+Sub bonus2()
+     For i = 10 To 14
+        a = Cells(i, 3).Value
+        If a > 1 Then
+            Cells(i, 4).Value = 3000
+        ElseIf a >= 0.9 Then
+             Cells(i, 4).Value = 500
+        Else
+             Cells(i, 4).Value = 0
+        End If
+     Next
+End Sub
+
+Sub prefixo()
+     For i = 10 To 14
+        a = Cells(i, 9).Value
+        If a = "RJ" Then
+            Cells(i, 10).Value = 21
+        ElseIf a = "SP" Then
+             Cells(i, 10).Value = 11
+        ElseIf a = "MG" Then
+             Cells(i, 10).Value = 31
+        Else
+             Cells(i, 10).Value = "desconhecido"
+        End If
+     Next
+End Sub
+
+Sub blackfriday()
+    For i = 29 To 33
+        a = Cells(i, 9).Value
+        If (Cells(i, 4).Value + Cells(i, 4).Value) / 2 > 6000 Then
+            Cells(i, 5).Value = "PROMOVIDO"
+        Else
+             Cells(i, 5).Value = 12000 - WorksheetFunction.Max(Cells(i, 3), Cells(i, 4))
+        End If
+     Next
+End Sub
+
+
+Sub forEach()
+    For Each celula In Range("a40:a45")
+        celula.Value = "vba"
+    Next
+End Sub
+
+Sub percorreAbas()
+    For Each aba In ThisWorkbook.Sheets
+    ' se fosse so in Sheets  ele faria em todos os sheets de todos os arquivos abertos
+        Sheets(aba).Activate
+        Range("a1").Value = "vba"
+    Next
+    
+End Sub
