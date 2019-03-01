@@ -7,7 +7,7 @@ Range("C2:D9").Value="Ronaldo"
 Cells("9,2").Value="MESSI"
 
 escolher a sheet:
-Sheets("Modificar C�lulars").Activate
+Sheets("Modificar Célulars").Activate
 
 Mudar formatacao da celular: record macro e usar o codigo dela
 
@@ -16,3 +16,51 @@ Variaveis:
 	Linha=23
 
 worksheetfunction.    => Permite que chame funcoes do worksheet
+
+Do until
+Em tabelas é interessante detectar quando a coluna esta vazia para fazer dentro do do until
+
+Do while
+
+
+
+
+Control seta pra baixo vai ate a ultima celula preenchida para baixo:
+no vba o ctrl é chamado de end
+ ult_linha = Range("D7").End(xlDown).Row
+
+
+for each aba in  ThisWorkbook.Sheets
+
+Nao esquecer de ativar a aba que esta com o aba.activate
+
+
+Function => Ela retorna automaticamente uma variavel com o mesmo nome da funcao
+para chamar ela no workbook eh so dar um =nome_funcao
+
+descobrir o caminho do arquivo:
+caminho = thisworkbook.path
+
+
+Hierarquia:   Application   =>   W0rkbook  => Sheets   => Cells/Range
+
+
+Eventos: criar macros direto no sheet, nao no modulo.. ai em cima do editor  colocar worksheet Activate(Para a macro executar quando o worksheet for aberto)
+Esquerda: qual elemento vai disparar o evento
+direita:quando vai acontecer o evento
+
+Eventos: Activate
+	Change
+	SelectionChange
+	etc....
+
+Target =>  Qual celula provocou o evento
+googlar os .
+
+formulario => Insert Form:
+ToolBox pra inserir mais componentes no formulario
+
+
+
+
+
