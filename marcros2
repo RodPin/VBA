@@ -1,0 +1,83 @@
+Function minhasoma(num1 As Integer, num2 As Integer) As Integer
+   
+    minhasoma = num1 + num2
+  
+End Function
+
+
+Function newconcat(intervalo As Range) As String
+ 
+    concatenado = ""
+    For Each cell In intervalo
+        concatenado = concatenado & cell.Value & " "
+    Next
+    
+    newconcat = concatenado
+End Function
+
+Function classificacao(cell As Double) As String
+    If cell < 30000 Then
+        resultado = "Fraco"
+    ElseIf cell < 65000 Then
+        resultado = "Bom"
+    Else
+        resultado = "MITO"
+    End If
+    classificacao = resultado
+End Function
+
+Sub classificacaoVendedor()
+     For i = 6 To 10
+        Cells(i, 4).Value = classificacao(Cells(i, 3))
+     Next
+End Sub
+
+Function calcularImposto(linha As Integer) As Double
+    semImposto = Cells(linha, 3).Value * Cells(6, 8).Value + Cells(linha, 4).Value * Cells(7, 8).Value
+    
+    If semImposto > 18000 Then
+        comImposto = semImposto * 1.125
+    ElseIf semImposto >= 12000 Then
+        comImposto = semImposto * 1.1
+    Else
+        comImposto = semImposto
+    End If
+    
+    calcularImposto = comImposto
+End Function
+
+Sub aplicarImposto()
+    Dim i As Integer
+    For i = 7 To 11
+        Cells(i, 5).Value = calcularImposto(i)
+    Next
+End Sub
+
+Sub cadastrarCarros()
+    Sheets("Métodos Workbook").Activate
+    ult_linha = Range("D7").End(xlDown).Row
+    writeNaLinha = ult_linha + 1
+    carro = InputBox("Qual carro?")
+    vendas = InputBx("Quantas Vendas?")
+    o
+    Cells(writeNaLinha, 4) = carro
+    Cells(writeNaLinha, 5) = vendas
+    
+End Sub
+
+
+Sub abrirArquivo()
+    caminho = ThisWorkbook.Path
+    Workbooks.Open (caminho & "/Auxiliar aula 3.xlsx")
+     Sheets("Exemplo Gráficos Carro").Activate
+     ult_linha = Range("A1").End(xlDown).Row
+    writeNaLinha = ult_linha + 1
+    carro = InputBox("Qual carro?")
+    vendas = InputBox("Quantas Vendas?")
+    preco = InputBox("Qual preco?")
+    
+    Cells(writeNaLinha, 1) = carro
+     Cells(writeNaLinha, 2) = preco
+    Cells(writeNaLinha, 3) = vendas
+    
+End Sub
