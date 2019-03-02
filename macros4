@@ -1,0 +1,128 @@
+Sub abre_formulario()
+    MeuFormulario.Show
+    
+    
+End Sub
+
+
+
+#### FORMULARIO :: #####
+
+
+
+Private Sub BarraDesconto_Change()
+    TextoDesconto.Value = BarraDesconto.Value & "%"
+    
+   Call calcula_preco
+End Sub
+
+
+Private Sub BotaoAutomatico_Click()
+    Call calcula_preco
+End Sub
+
+
+
+Private Sub BotaoCancelar_Click()
+      Unload MeuFormulario
+
+End Sub
+
+Private Sub BotaoConfirmar_Click()
+caminho = ThisWorkbook.Path
+    Workbooks.Open (caminho + "\Estoque.xlsm")
+    For linha = 2 To 36
+        If Cells(linha, 1).Value = ListaMarca.Value And Cells(linha, 2) = CaixaModelo.Value Then
+            quantidade = Cells(linha, 3)
+            If Cells(linha, 3) > 0 Then
+                Cells(linha, 3) = Cells(linha, 3) - 1
+            End If
+        End If
+    Next
+    ActiveWorkbook.Save
+    ActiveWorkbook.Close
+    
+    
+    Workbooks.Open (caminho + "\Aula 4 VBA.xlsm")
+    If BotaoManual = True Then
+            valor_cambio = Sheets("Dados").Range("F2").Value
+        ElseIf BotaoAutomatico = True Then
+            valor_cambio = Sheets("Dados").Range("F3").Value
+        End If
+        Sheets("Vendas Diárias").Activate
+        ultima_linha = Range("A1000").End(xlUp).Row + 1
+        Cells(ultima_linha, 1).Value = Range("A1000").End(xlUp).Row
+        Cells(ultima_linha, 2).Value = "21/02/2019"
+        Cells(ultima_linha, 3).Value = ListaMarca.Value
+        Cells(ultima_linha, 4).Value = CaixaModelo.Value
+        Cells(ultima_linha, 5).Value = valor_cambio
+        Cells(ultima_linha, 6).Value = BarraDesconto.Value & "%"
+        Cells(ultima_linha, 7).Value = TextoValor.Value
+    If quantidade > 0 Then
+          Cells(ultima_linha, 8).Value = "SIM"
+    Else
+         Cells(ultima_linha, 8).Value = "NAO"
+    End If
+
+    Unload MeuFormulario
+    
+    
+
+   
+
+End Sub
+
+Private Sub BotaoManual_Click()
+    Call calcula_preco
+End Sub
+
+Private Sub CaixaModelo_Change()
+  
+    Call calcula_preco
+End Sub
+
+Private Sub ListaMarca_Change()
+    
+     caminho = ThisWorkbook.Path
+    ImagemMoto.Picture = LoadPicture(caminho + "\Imagens\" + ListaMarca.Value + ".jpg")
+    Call calcula_preco
+    
+   
+End Sub
+
+
+Private Sub UserForm_Initialize()
+    Sheets("Dados").Activate
+    ult_linha = Range("a2").End(xlDown).Row + 1
+    ListaMarca.RowSource = "Dados!A2:A" & ult_linha
+    
+    ult_linha = Range("c2").End(xlDown).Row + 1
+    CaixaModelo.RowSource = "Dados!C2:C" & ult_linha
+    
+End Sub
+
+Sub calcula_preco()
+    Dim valor_marca As Double, valor_modelo As Double, valor_cambio As Double, valor_desconto As Double, preco As Double
+    
+    
+    If ListaMarca.Value <> "" Then
+        linha_marca = Cells.Find(ListaMarca.Value).Row
+        valor_marca = Cells(linha_marca, 2).Value
+    End If
+    If CaixaModelo.Value <> "" Then
+        linha_modelo = Cells.Find(CaixaModelo.Value).Row
+        valor_modelo = Cells(linha_modelo, 4).Value
+    End If
+    
+    If BotaoManual = True Then
+        valor_cambio = Sheets("Dados").Range("F2").Value
+    ElseIf BotaoAutomatico = True Then
+        valor_cambio = Sheets("Dados").Range("F3").Value
+    End If
+    
+    
+        valor_desconto = BarraDesconto.Value
+    
+
+    TextoValor.Value = (valor_marca + valor_modelo + valor_cambio) * (100 - valor_desconto) / 100
+End Sub
